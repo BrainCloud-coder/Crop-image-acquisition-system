@@ -1,0 +1,61 @@
+{% extends admin_base_template %}
+{% block body %}
+<style>
+	.camera-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+		gap: 4px;
+		justify-items: center;
+		align-items: center;
+		margin-top: 2px;
+	}
+
+	.camera-card {
+		width: 420px;
+		text-align: center;
+		box-shadow: 0 2px 8px #eee;
+		border-radius: 8px;
+		padding: 4px;
+		background: #fff;
+	}
+
+	.camera-img {
+		border-radius: 4px;
+		max-width: 100%;
+		max-height: 320px;
+		display: block;
+		margin: 0 auto;
+	}
+
+	.camera-img.cover {
+		object-fit: cover;
+		width: 100%;
+		height: 320px;
+	}
+
+	.camera-title {
+		margin: 1px 0;
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+</style>
+<div class="camera-grid">
+	<div class="camera-card">
+		<img src="/camera/stream" alt="摄像头1" class="camera-img" decoding="async" loading="lazy">
+		<div class="camera-title">摄像头1</div>
+	</div>
+	<div class="camera-card">
+		<img src="/static/camera2.jpg" alt="摄像头2" class="camera-img cover">
+		<div class="camera-title">摄像头2</div>
+	</div>
+	<div class="camera-card">
+		<img src="/static/camera3.jpg" alt="摄像头3" class="camera-img cover">
+		<div class="camera-title">摄像头3</div>
+	</div>
+	<div class="camera-card">
+		<img src="/static/camera4.jpg" alt="摄像头4" class="camera-img cover">
+		<div class="camera-title">摄像头4</div>
+	</div>
+</div>
+{% endblock %}

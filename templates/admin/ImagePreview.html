@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>显示图片</title>
+    <style>
+        body {
+            font-family: "微软雅黑", Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px 24px 24px 24px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .filename {
+            color: #888;
+            margin-bottom: 20px;
+        }
+        #display-img {
+            display: block;
+            margin: 0 auto 24px auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            background: #eee;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 8px 24px;
+            background: #409eff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .back-btn:hover {
+            background: #3076c9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>图片展示</h1>
+        <div class="filename">图片文件名：{{ filename }}</div>
+        <img id="display-img" alt="展示图片">
+        <br>
+        <button class="back-btn" onclick="window.history.back()">返回上一界面</button>
+    </div>
+    <script>
+    async function loadImage() {
+        const filename = "{{ filename }}";
+        const response = await fetch(`/image_base64/${filename}`);
+        if (response.ok) {
+            const data = await response.json();
+            if (data.image_data) {
+                document.getElementById('display-img').src = 'data:image/png;base64,' + data.image_data;
+            } else {
+                document.getElementById('display-img').alt = '图片数据为空';
+            }
+        } else {
+            document.getElementById('display-img').alt = '图片加载失败';
+        }
+    }
+    window.onload = loadImage;
+    </script>
+</body>
+</html>
