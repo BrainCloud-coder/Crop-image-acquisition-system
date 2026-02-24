@@ -7,4 +7,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # 图片存储地址配置
-    IMAGE_FOLDER = "MyDemo01/static/photos"
+    IMAGE_FOLDER = "./static/photos"
