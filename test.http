@@ -1,0 +1,55 @@
+POST http://192.168.100.188/digest/CaptureV2
+Content-Type: application/json
+User-Agent: curl/4.7.1
+Authorization: Digest username="admin", password="123456"
+
+{
+  "Type": 0,
+  "Dev": 1,
+  "Ch": 1,
+  "Data": {
+    "DataType": 0,
+    "StreamNo": 1
+  }
+}
+
+### 
+GET http://baidu.com
+
+### 
+POST http://192.168.137.45:5000/sensor
+Content-Type: application/json
+
+{
+  "d1": 1.23,
+  "d2": 4.56,
+  "d3": 7.89,
+  "d4": 0.12
+}
+
+
+### 测试默认最近24小时数据
+GET http://localhost:5000/admin/sensordata/json
+Accept: application/json
+
+
+### 测试
+GET http://localhost:5000/admin/sensordata/json?start=2025-09-21T08:30:29.572Z&end=2025-09-22T08:30:29.572Z
+Accept: application/json
+ 
+
+### 测试带时间范围的数据查询
+GET http://localhost:5000/admin/sensordata/json?start=2023-01-01T00:00:00Z&end=2025-09-23T00:00:00Z
+Accept: application/json
+
+### 测试错误的时间格式（应该返回错误）
+GET http://localhost:5000/admin/sensordata/json?start=invalid_date&end=2023-01-02T00:00:00Z
+Accept: application/json
+
+### 测试空结果的时间范围
+GET http://localhost:5000/admin/sensordata/json?start=2099-01-01T00:00:00Z&end=2099-01-02T00:00:00Z
+Accept: application/json
+
+### 测试部分参数（应该使用默认值）
+GET http://localhost:5000/admin/sensordata/json?start=2023-01-01T00:00:00Z
+Accept: application/json
